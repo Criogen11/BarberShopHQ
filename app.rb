@@ -33,15 +33,11 @@ get '/visit' do
 end	
 
 post '/visit' do
-	@username=params[:user_name]
-	@phone=params[:phone]
-	@datetime=params[:date]
-	@barber=params[:barber]
+	
+	c = Client.new params[:client]
+	c.save
 
-	@client = Client.create(name: @username, phone: @phone, datestamp: @datetime, barber: @barber)
-	@client.save
-
-	return erb :index
+	erb "Спасибо что записались!"
 
 end	
 
