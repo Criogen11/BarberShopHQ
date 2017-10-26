@@ -3,7 +3,7 @@ class CreateBarbers < ActiveRecord::Migration[5.1]
   	create_table :barbers do |t|
   		t.text :name
 
-  		t.timestamp
+  		t.timestamps
   	end
   	
 Barber.create :name => 'Илья Варсин'

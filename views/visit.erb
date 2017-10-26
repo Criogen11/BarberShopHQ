@@ -1,0 +1,31 @@
+
+
+<h3 id="aaa">Записаться на стрижку</h3>
+<p><%= @message %></p>
+<p><%= @name_error %></p>
+<p><%= @phone_error %></p>
+<p><%= @date_error %></p>
+<p><%= @barber_error %></p>
+<form action="/visit" method='POST' class="form-inline well">
+<p>Укажите ваше имя</p>
+<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ваше имя" name="user_name" value="<%=@user_name %>" size="40"></br>
+<p style="margin-top: 15px">Укажите ваш телефон</p>
+<input  type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ваш телефон" name="phone" value="<%= @phone %>" size="40"></br>
+<p style="margin-top: 15px">Когда вас ждать?</p>
+<input type="datetime-local" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Время записи" name="date" size="40" value="<%=@date %>"></br>
+<p style="margin-top: 15px">Выберите парикмахера</p>
+<select class="form-control" id="exampleFormControlSelect1" name="barber" value="<%= @barber %>" style="margin-top: 5px">
+	<% @barber.each do |item| %>
+		
+		<option <%= @barber == item['name'] ? 'selected' : '' %>><%= item['name'] %></option>
+		
+	<% end %>
+</select></br>
+<input class="btn btn-primary" type='submit' style="margin-top: 15px" value='Записаться'>
+</form>
+
+<script type="text/javascript">
+	
+
+
+</script>
