@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20171023191125) do
     t.text "name"
   end
 
-  create_table "client", force: :cascade do |t|
+  create_table "clients", force: :cascade do |t|
     t.text "name"
     t.text "phone"
     t.text "datestamp"
