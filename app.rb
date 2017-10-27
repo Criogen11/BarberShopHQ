@@ -20,7 +20,8 @@ class Barber < ActiveRecord::Base
 end	
 
 class Contact <ActiveRecord::Base
-
+	validates :email_address, presence: true
+	validates :message, presence: true
 end	
 
 before do
@@ -32,16 +33,18 @@ get '/' do
 end
 
 get '/visit' do
+	@c = Client.new
 	erb :visit
 end	
 
 post '/visit' do
 	
-	c = Client.new params[:client]
-	if c.save
+	@c = Client.new params[:client]
+	if @c.save
 		erb "Спасибо что записались!"
 	else
-		erb "Ошибка!"
+		@error = @c.errors.full_messages.first
+		erb :visit
 	end		
 end	
 
@@ -50,13 +53,30 @@ get '/contacts' do
 end
 
 post '/contacts' do
-	@message=params['message']
-	@email=params['email_address']
+	
+	@b = Contact.new params[:contact]
+	if @b.save
+		erb "Спасибо за ваше сообщение!"
+	else 
+		@error = @b.errors.full_messages.first
+		erb :contacts
+	end	
 
-	@contacts = Contact.create(email_address: @email, message: @message)
-	@contacts.save
+end	
 
-	return erb :index
+get '/barber/:id' do
+	@barber = Barber.find(params[:id])
+	erb :barber
+end	
+
+get '/bookings' do
+	@clients = Client.order('created_at DESC')
+	erb :bookings
+end	
+
+get '/client/:id' do
+	@client = Client.find(params[:id])
+	erb :client
 end	
 
 
